@@ -4,6 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -12,10 +13,11 @@ model User {
   email     String   @unique
   createdAt DateTime @default(now())
 }
- 
+
 model Student {
-  id        Int      @id @default(autoincrement())
-  name      String
-  rollNo    Int      @unique
-  project   String
+  id      Int    @id @default(autoincrement())
+  name    String
+  rollNo  Int    @unique
+  project String
 }
+

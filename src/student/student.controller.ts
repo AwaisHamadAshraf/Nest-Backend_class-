@@ -13,7 +13,7 @@ export class StudentController {
 
   @Get(':rollNo')
   getByRoll(@Param('rollNo') rollNo: string) {
-    return this.svc.getByRoll(rollNo);
+    return this.svc.getByRoll(Number(rollNo));
   }
 
   @Post()
@@ -22,12 +22,15 @@ export class StudentController {
   }
 
   @Patch(':rollNo')
-  update(@Param('rollNo') rollNo: string, @Body() dto: Partial<CreateStudentDto>) {
-    return this.svc.update(rollNo, dto);
+  update(
+    @Param('rollNo') rollNo: string,
+    @Body() dto: Partial<CreateStudentDto>,
+  ) {
+    return this.svc.update(Number(rollNo), dto);
   }
 
   @Delete(':rollNo')
   delete(@Param('rollNo') rollNo: string) {
-    return this.svc.delete(rollNo);
+    return this.svc.delete(Number(rollNo));
   }
 }
