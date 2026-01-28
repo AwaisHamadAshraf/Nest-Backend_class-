@@ -29,6 +29,16 @@ export class StudentService {
   }
 
   async create(dto: CreateStudentDto) {
+    const existing = await this.prisma.student.findUnique({
+      where: { rollNo: dto.rollNo },
+    });
+
+    if (existing) {
+      throw new ConflictException(
+        `Student with rollNo ${dto.rollNo} already exists`,
+      );
+    }
+
     try {
       return await this.prisma.student.create({
         data: {
